@@ -1,0 +1,214 @@
+﻿<Window x:Class="FuncProgrammingProjectDOTNET.LessonsViews.Lesson1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FuncProgrammingProjectDOTNET.LessonsViews"
+        mc:Ignorable="d"
+        Title="Lesson1" Height="720" Width="1280">
+    <Window.Resources>
+        <Style x:Key="RoundButtonTemplate" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="20" Background="DarkGreen"
+                                BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ComicSanTextBox" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+        </Style>
+    </Window.Resources>
+    <ScrollViewer>
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <TextBlock  HorizontalAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="80px">LINQ</TextBlock>
+            </Grid>
+            <Grid Grid.Row="1">
+                <TextBlock Background="LightGray" TextWrapping="Wrap" HorizontalAlignment="Left"  FontFamily="Calibri" FontSize="16px">
+              Language-Integrated Query (LINQ) is the name for a set of technologies based on the integration of query capabilities directly into the C# language. Traditionally, queries against data are expressed as simple strings without type checking at compile time or IntelliSense support. Furthermore, you have to learn a different query language for each type of data source: SQL databases, XML documents, various Web services, and so on. With LINQ, a query is a first-class language construct, just like classes, methods, events.
+
+For a developer who writes queries, the most visible "language-integrated" part of LINQ is the query expression. Query expressions are written in a declarative query syntax. By using query syntax, you can perform filtering, ordering, and grouping operations on data sources with a minimum of code. You use the same basic query expression patterns to query and transform data in SQL databases, ADO .NET Datasets, XML documents and streams, and .NET collections.
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="2">
+                <TextBlock HorizontalAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="40px">
+                Select
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="3">
+                <TextBlock FontFamily="Calibri" HorizontalAlignment="Center">
+                The select clause produces the results of the query and specifies the "shape" or type of each returned element.
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock TextWrapping="WrapWithOverflow" Style="{StaticResource ComicSanTextBox}" Padding="10" Grid.Column="0"  Background="Black" Foreground="White" Text="{Binding SelectCodeString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Name="MyTextBox"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Button Padding="10" Style="{StaticResource RoundButtonTemplate}" Command="{Binding RunSelectCode}" Grid.Row="0" VerticalAlignment="Top" Height="50px" >
+                        <TextBox BorderThickness="0" Text="Run" IsReadOnly="True" BorderBrush="Transparent" Background="Transparent" FontSize="15px"/>
+                    </Button>
+                </Grid>
+                <ListBox Padding="10" Grid.Column="2" ItemsSource="{Binding SelectResult}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Background="AliceBlue" Foreground="Black" FontSize="20px" Text="{Binding}" />
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            <Grid Margin="0,10,0,0" Grid.Row="5">
+                <TextBlock HorizontalAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="40px">
+                Where
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="6">
+                <TextBlock FontFamily="Calibri" HorizontalAlignment="Center">
+                Filters a sequence of values based on a predicate.
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock TextWrapping="WrapWithOverflow" Style="{StaticResource ComicSanTextBox}" Padding="10" Grid.Column="0"  Background="Black" Foreground="White" Text="{Binding WhereCodeString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Button Padding="10" Style="{StaticResource RoundButtonTemplate}" Command="{Binding RunWhereCode}" Grid.Row="0" VerticalAlignment="Top" Height="50px" >
+                        <TextBox BorderThickness="0" Text="Run" IsReadOnly="True" BorderBrush="Transparent" Background="Transparent" FontSize="15px"/>
+                    </Button>
+                </Grid>
+                <ListBox Padding="10" Grid.Column="2" ItemsSource="{Binding WhereResult}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Background="AliceBlue" Foreground="Black" FontSize="20px" Text="{Binding}" />
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            <Grid Margin="0,10,0,0" Grid.Row="8">
+                <TextBlock HorizontalAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="40px">
+                OrderBy
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="9">
+                <TextBlock FontFamily="Calibri" HorizontalAlignment="Center">
+                Sorts the elements of a sequence in ascending order.
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock TextWrapping="WrapWithOverflow" Style="{StaticResource ComicSanTextBox}" Padding="10" Grid.Column="0"  Background="Black" Foreground="White" Text="{Binding OrderByCodeString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Button Padding="10" Style="{StaticResource RoundButtonTemplate}" Command="{Binding RunOrderByCode}" Grid.Row="0" VerticalAlignment="Top" Height="50px" >
+                        <TextBox BorderThickness="0" Text="Run" IsReadOnly="True" BorderBrush="Transparent" Background="Transparent" FontSize="15px"/>
+                    </Button>
+                </Grid>
+                <oxy:PlotView Padding="10" Grid.Column="2" Model="{Binding OrderByResult}"  Background="AliceBlue"/>
+            </Grid>
+            <Grid Margin="0,10,0,0" Grid.Row="11">
+                <TextBlock HorizontalAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="40px">
+                Aggregate
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="12">
+                <TextBlock FontFamily="Calibri" HorizontalAlignment="Center">
+                Aggregate method applies a function to each item of a collection.
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="13">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock TextWrapping="WrapWithOverflow" Style="{StaticResource ComicSanTextBox}" Padding="10" Grid.Column="0"  Background="Black" Foreground="White" Text="{Binding AggregateCodeString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Button Padding="10" Style="{StaticResource RoundButtonTemplate}" Command="{Binding RunAggregateCode}" Grid.Row="0" VerticalAlignment="Top" Height="50px" >
+                        <TextBox BorderThickness="0" Text="Run" IsReadOnly="True" BorderBrush="Transparent" Background="Transparent" FontSize="15px"/>
+                    </Button>
+                </Grid>
+                <oxy:PlotView Padding="10" Grid.Column="2" Model="{Binding AggregateResult}"  Background="AliceBlue"/>
+            </Grid>
+            <Grid Margin="0,10,0,0" Grid.Row="14">
+                <TextBlock HorizontalAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="40px">
+                Group by
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="15">
+                <TextBlock TextWrapping="WrapWithOverflow" FontFamily="Calibri" HorizontalAlignment="Center">
+                Groups the elements of a sequence according to a specified key selector function and creates a result value from each group and its key. Key values are compared by using a specified comparer, and the elements of each group are projected by using a specified function.
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock TextWrapping="WrapWithOverflow" Style="{StaticResource ComicSanTextBox}" Padding="10" Grid.Column="0"  Background="Black" Foreground="White" Text="{Binding GroupByCodeString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Button Padding="10" Style="{StaticResource RoundButtonTemplate}" Command="{Binding RunGroupByCode}" Grid.Row="0" VerticalAlignment="Top" Height="50px" >
+                        <TextBox BorderThickness="0" Text="Run" IsReadOnly="True" BorderBrush="Transparent" Background="Transparent" FontSize="15px"/>
+                    </Button>
+                </Grid>
+                <DataGrid FontSize="20px" ItemsSource="{Binding GroupByResult}" Grid.Column="2">
+
+                </DataGrid>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</Window>
