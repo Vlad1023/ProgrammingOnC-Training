@@ -21,7 +21,7 @@ namespace FuncProgrammingProjectDOTNET.LessonsViewModels
         private IEnumerable<string> whereResult;
         private IEnumerable<string> orderByResult;
         private IEnumerable<string> aggregateResult;
-        private IEnumerable<CompanyPhonesViewModel> groupByResult;
+        private IEnumerable<string> groupByResult;
         private readonly string selectCodeString =
                 @"let hello name = ""Hello "" + name
                 //usage
@@ -50,35 +50,42 @@ namespace FuncProgrammingProjectDOTNET.LessonsViewModels
         private readonly string aggregateString =
             @"let list1 = [ 1 .. 10 ]
 
-            let addToList n = list1::n
+            let list2 = [ 2; 3; 5]
+
+            let list3 = 40::list1
+
+            let list4 = list1 @ list2
+
+            let rec sum list =
+               match list with
+               | head :: tail -> head + sum tail
+               | [] -> 0
 
             //usage
-            addToList 15
+            printf list3
+            printf list4
+            printf sum [1;3;9;7]
             ";
         private readonly string groupByString =
-            @"List<Phone> phones = new List<Phone>
-            {
-            new Phone {Name=""Lumia 430"", Company=""Microsoft"" },
-            new Phone {Name""Mi 5"", Company=""Xiaomi"" },
-            new Phone {Name=""LG G 3"", Company=""LG"" },
-            new Phone { Name = ""iPhone 5"", Company = ""Apple"" },
-            new Phone { Name = ""Lumia 930"" Company = ""Microsoft"" },
-            new Phone { Name = ""iPhone 6"", Company = ""Apple"" },
-            new Phone { Name = ""Lumia 630"", Company = ""Microsoft"" },
-            new Phone { Name = ""LG G 4"", Company = ""LG"" }
-            };
+            @"let squares =
+                seq {
+                    for i in 1..3 -> i * i
+                }
 
-            var phoneGroups = from phone in phones
-                              group phone by phone.Company;
+            let cubes =
+                seq {
+                    for i in 1..3 -> i * i * i
+                }
 
-            foreach (IGrouping<string, Phone> g in phoneGroups)
-            {
-                Console.WriteLine(g.Key);
-                foreach (var t in g)
-                    Console.WriteLine(t.Name);
-                Console.WriteLine();
-            }
-";
+            let squaresAndCubes =
+                seq {
+                    yield! squares
+                    yield! cubes
+                }
+
+        //usage
+        squaresAndCubes
+        ";
         public Lesson2ViewModel()
         {
             this.RunSelectCode = new RelayCommand(ExecuteSelectCode);
@@ -125,38 +132,29 @@ namespace FuncProgrammingProjectDOTNET.LessonsViewModels
 
         public void ExecuteAggregateCode()
         {
-            //var result = FSharpSampleLibrary.FSharpExamples.addToList(15);
-            //this.AggregateResult = result;
+            var list3 = string.Join(",", FSharpSampleLibrary.FSharpExamples.list3.ToList());
+            var list4 = string.Join(",", FSharpSampleLibrary.FSharpExamples.list4.ToList());
+
+            var sum = string.Join(",", FSharpSampleLibrary.FSharpExamples.sum(CreateFSharpList(new List<int>() { 1, 3, 9, 7 }, 0)));
+            this.AggregateResult = new List<string> { list3, list4, sum }; ;
+        }
+
+        private static Microsoft.FSharp.Collections.FSharpList<T> CreateFSharpList<T>(IList<T> input, int index)
+        {
+            if (index >= input.Count)
+            {
+                return Microsoft.FSharp.Collections.FSharpList<T>.Empty;
+            }
+            else
+            {
+                return Microsoft.FSharp.Collections.FSharpList<T>.Cons(input[index], CreateFSharpList(input, index + 1));
+            }
         }
 
         public void ExecuteGroupByCode()
         {
-            List<Phone> phones = new List<Phone>
-            {
-                new Phone {Name="Lumia 430", Company="Microsoft" },
-                new Phone {Name="Mi 5", Company="Xiaomi" },
-                new Phone {Name="LG G 3", Company="LG" },
-                new Phone {Name="iPhone 5", Company="Apple" },
-                new Phone {Name="Lumia 930", Company="Microsoft" },
-                new Phone {Name="iPhone 6", Company="Apple" },
-                new Phone {Name="Lumia 630", Company="Microsoft" },
-                new Phone {Name="LG G 4", Company="LG" }
-            };
-
-            var phoneGroups = from phone in phones
-                              group phone by phone.Company;
-            var result = new List<CompanyPhonesViewModel>();
-            foreach (IGrouping<string, Phone> g in phoneGroups)
-            {
-                var companyPhones = new CompanyPhonesViewModel();
-                companyPhones.CompanyName = g.Key;
-                StringBuilder phoneModels = new StringBuilder();
-                foreach (var t in g)
-                    phoneModels.Append(t.Name += ", ");
-                companyPhones.phoneModels = phoneModels.ToString();
-                result.Add(companyPhones);
-            }
-            this.GroupByResult = result;
+            var result1 = string.Join(",", FSharpSampleLibrary.FSharpExamples.squaresAndCubes);
+            this.GroupByResult = new List<string> { result1 };
         }
 
         public string SelectCodeString => selectCodeString;
@@ -217,7 +215,7 @@ namespace FuncProgrammingProjectDOTNET.LessonsViewModels
             }
         }
 
-        public IEnumerable<CompanyPhonesViewModel> GroupByResult
+        public IEnumerable<string> GroupByResult
         {
             get
             {
@@ -228,28 +226,6 @@ namespace FuncProgrammingProjectDOTNET.LessonsViewModels
                 this.groupByResult = value;
                 OnPropertyChanged("GroupByResult");
             }
-        }
-
-        class Pet
-        {
-            public string Name { get; set; }
-            public int Age { get; set; }
-        }
-        class Person
-        {
-            public int Age { get; set; }
-            public double Sallary { get; set; }
-        }
-        class Phone
-        {
-            public string Name { get; set; }
-            public string Company { get; set; }
-        }
-
-        public class CompanyPhonesViewModel
-        {
-            public string CompanyName { get; set; }
-            public string phoneModels { get; set; }
         }
     }
 }
