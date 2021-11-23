@@ -1,4 +1,4 @@
-﻿using FuncProgrammingProjectDOTNET.LessonsViewModels;
+using FuncProgrammingProjectDOTNET.LessonsViewModels;
 using System.Windows;
 
 namespace FuncProgrammingProjectDOTNET.LessonsViews
