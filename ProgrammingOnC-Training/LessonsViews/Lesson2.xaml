@@ -1,12 +1,234 @@
 ﻿<Window x:Class="FuncProgrammingProjectDOTNET.LessonsViews.Lesson2"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FuncProgrammingProjectDOTNET.LessonsViews"
         mc:Ignorable="d"
-        Title="Lesson2" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Lesson2" Height="720" Width="1280">
+    <Window.Resources>
+        <Style x:Key="RoundButtonTemplate" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="20" Background="DarkGreen"
+                                BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ComicSanTextBox" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+        </Style>
+    </Window.Resources>
+    <ScrollViewer>
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <TextBlock  HorizontalAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="80px">F#</TextBlock>
+            </Grid>
+            <Grid Grid.Row="1">
+                <TextBlock Background="LightGray" TextWrapping="Wrap" HorizontalAlignment="Left"  FontFamily="Calibri" FontSize="16px">
+                F# (pronounced F sharp) is a functional-first, general purpose, strongly typed, multi-paradigm programming language that encompasses functional, imperative, and object-oriented programming methods. F# is most often used as a cross-platform Common Language Infrastructure (CLI) language on .NET, but it can also generate JavaScript and graphics processing unit (GPU) code.<LineBreak/><LineBreak/>
+                What are the differences between C# and F#? <LineBreak/>
+                1. The F# code is more compact<LineBreak/>
+                2. The F# code didn’t have any type declarations<LineBreak/>
+                3. F# can be developed interactively<LineBreak/>
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="2">
+                <TextBlock HorizontalAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="40px">
+                Function simple example
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="3">
+                <TextBlock FontFamily="Calibri" HorizontalAlignment="Center">
+                Example of function declaration
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock TextWrapping="WrapWithOverflow" Style="{StaticResource ComicSanTextBox}" Padding="10" Grid.Column="0"  Background="Black" Foreground="White" Text="{Binding SelectCodeString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Name="MyTextBox"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Button Padding="10" Style="{StaticResource RoundButtonTemplate}" Command="{Binding RunSelectCode}" Grid.Row="0" VerticalAlignment="Top" Height="50px" >
+                        <TextBox BorderThickness="0" Text="Run" IsReadOnly="True" BorderBrush="Transparent" Background="Transparent" FontSize="15px"/>
+                    </Button>
+                </Grid>
+                <ListBox Padding="10" Grid.Column="2" ItemsSource="{Binding SelectResult}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Background="AliceBlue" Foreground="Black" FontSize="20px" Text="{Binding}" />
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            <Grid Margin="0,10,0,0" Grid.Row="5">
+                <TextBlock HorizontalAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="40px">
+                Less code
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="6">
+                <TextBlock FontFamily="Calibri" HorizontalAlignment="Center">
+                The most obvious difference is that there is a lot more C# code. 13 C# lines compared with 3 F# lines (ignoring comments).<LineBreak/>
+                The C# code has lots of “noise”, things like curly braces, semicolons, etc.<LineBreak/>
+                And in C# the functions cannot stand alone, but need to be added to some class.
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock TextWrapping="WrapWithOverflow" Style="{StaticResource ComicSanTextBox}" Padding="10" Grid.Column="0"  Background="Black" Foreground="White" Text="{Binding WhereCodeString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Button Padding="10" Style="{StaticResource RoundButtonTemplate}" Command="{Binding RunWhereCode}" Grid.Row="0" VerticalAlignment="Top" Height="50px" >
+                        <TextBox BorderThickness="0" Text="Run" IsReadOnly="True" BorderBrush="Transparent" Background="Transparent" FontSize="15px"/>
+                    </Button>
+                </Grid>
+                <ListBox Padding="10" Grid.Column="2" ItemsSource="{Binding WhereResult}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Background="AliceBlue" Foreground="Black" FontSize="20px" Text="{Binding}" />
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            <Grid Margin="0,10,0,0" Grid.Row="8">
+                <TextBlock HorizontalAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="40px">
+                No type declarations, but types can be restricted
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="9">
+                <TextBlock FontFamily="Calibri" HorizontalAlignment="Center">
+                Example of square and sumOfSquares functions for float
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock TextWrapping="WrapWithOverflow" Style="{StaticResource ComicSanTextBox}" Padding="10" Grid.Column="0"  Background="Black" Foreground="White" Text="{Binding OrderByCodeString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Button Padding="10" Style="{StaticResource RoundButtonTemplate}" Command="{Binding RunOrderByCode}" Grid.Row="0" VerticalAlignment="Top" Height="50px" >
+                        <TextBox BorderThickness="0" Text="Run" IsReadOnly="True" BorderBrush="Transparent" Background="Transparent" FontSize="15px"/>
+                    </Button>
+                </Grid>
+                <ListBox Padding="10" Grid.Column="2" ItemsSource="{Binding OrderByResult}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Background="AliceBlue" Foreground="Black" FontSize="20px" Text="{Binding}" />
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            <Grid Margin="0,10,0,0" Grid.Row="11">
+                <TextBlock HorizontalAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="40px">
+                Lists
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="12">
+                <TextBlock FontFamily="Calibri" HorizontalAlignment="Center">
+                Discriminated unions are similar to inheritance in object oriented programming. Here is an example in F#.
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="13">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock TextWrapping="WrapWithOverflow" Style="{StaticResource ComicSanTextBox}" Padding="10" Grid.Column="0"  Background="Black" Foreground="White" Text="{Binding AggregateCodeString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Button Padding="10" Style="{StaticResource RoundButtonTemplate}" Command="{Binding RunAggregateCode}" Grid.Row="0" VerticalAlignment="Top" Height="50px" >
+                        <TextBox BorderThickness="0" Text="Run" IsReadOnly="True" BorderBrush="Transparent" Background="Transparent" FontSize="15px"/>
+                    </Button>
+                </Grid>
+                <ListBox Padding="10" Grid.Column="2" ItemsSource="{Binding AggregateResult}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Background="AliceBlue" Foreground="Black" FontSize="20px" Text="{Binding}" />
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            <Grid Margin="0,10,0,0" Grid.Row="14">
+                <TextBlock HorizontalAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="40px">
+                Sorting algorithm
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="15">
+                <TextBlock TextWrapping="WrapWithOverflow" FontFamily="Calibri" HorizontalAlignment="Center">
+               Note that this is a simplified algorithm and is not optimized (and it does not sort in place, like a true quicksort); we want to focus on clarity for now.
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock TextWrapping="WrapWithOverflow" Style="{StaticResource ComicSanTextBox}" Padding="10" Grid.Column="0"  Background="Black" Foreground="White" Text="{Binding GroupByCodeString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Button Padding="10" Style="{StaticResource RoundButtonTemplate}" Command="{Binding RunGroupByCode}" Grid.Row="0" VerticalAlignment="Top" Height="50px" >
+                        <TextBox BorderThickness="0" Text="Run" IsReadOnly="True" BorderBrush="Transparent" Background="Transparent" FontSize="15px"/>
+                    </Button>
+                </Grid>
+                <DataGrid FontSize="20px" ItemsSource="{Binding GroupByResult}" Grid.Column="2">
+
+                </DataGrid>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
 </Window>

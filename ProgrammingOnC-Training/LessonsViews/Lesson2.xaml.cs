@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FuncProgrammingProjectDOTNET.LessonsViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,7 @@ namespace FuncProgrammingProjectDOTNET.LessonsViews
     {
         public Lesson2()
         {
+            DataContext = new Lesson2ViewModel();
             InitializeComponent();
         }
     }
