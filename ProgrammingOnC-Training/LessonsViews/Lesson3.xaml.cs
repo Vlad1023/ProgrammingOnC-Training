@@ -1,4 +1,5 @@
-﻿using System.Windows;
+using FuncProgrammingProjectDOTNET.LessonsViewModels;
+using System.Windows;
 
 namespace FuncProgrammingProjectDOTNET.LessonsViews
 {
@@ -9,6 +10,7 @@ namespace FuncProgrammingProjectDOTNET.LessonsViews
     {
         public Lesson3()
         {
+            DataContext = new Lesson3ViewModel();
             InitializeComponent();
         }
     }
