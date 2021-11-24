@@ -4,9 +4,210 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FuncProgrammingProjectDOTNET.LessonsViews"
+        xmlns:vm="clr-namespace:FuncProgrammingProjectDOTNET.LessonsViewModels"
+        xmlns:skia="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
         mc:Ignorable="d"
-        Title="Lesson4" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Lesson4"
+        Height="720"
+        Width="1280">
+
+    <Window.DataContext>
+        <vm:Lesson4ViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+
+        <Style x:Key="RoundButtonTemplate" TargetType="Button">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </Style.Resources>
+            <Setter Property="Background" Value="DarkGreen"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ComicSanTextBox" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+        </Style>
+
+        <Style x:Key="TitleTextBlock" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="40px"/>
+        </Style>
+
+        <Style x:Key="DescriptionTextBlock" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
+        </Style>
+
+        <Style x:Key="CodeTextBlock" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Window.Content>
+
+        <ScrollViewer>
+
+            <StackPanel Orientation="Vertical"
+                        Margin="5">
+
+                <!-- TITLE -->
+                <TextBlock  HorizontalAlignment="Center" FontFamily="Calibri" FontWeight="Bold" FontSize="80px">Skia Sharp</TextBlock>
+
+                <!-- DESCRIPTION -->
+                <TextBlock Background="LightGray" TextWrapping="Wrap" HorizontalAlignment="Left"  FontFamily="Calibri" FontSize="16px">
+                   The Skia Graphics Engine is an open-source graphics library written in C++ which abstracts away platform-specific graphics API (which differ from one to another). Skia Inc. originally developed the library; Google acquired it in 2005, and then released the software as open source licensed under the New BSD free software license in 2008.
+                </TextBlock>
+
+                <!-- TITLE OF EXAMPLE 1 -->
+                <TextBlock Style="{StaticResource  TitleTextBlock}"
+                           Text="Text"/>
+
+                <!-- DESCRIPTON OF EXAMPLE 1 -->
+                <TextBlock Style="{StaticResource DescriptionTextBlock}"
+                           Text="We can draw text on image."/>
+
+                <!-- EXAMPLE 1 -->
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                               Style="{StaticResource CodeTextBlock}"
+                               Text="{Binding ExampleOneCode}"/>
+
+                    <Button Grid.Column="1"
+                            Style="{StaticResource RoundButtonTemplate}"
+                            Click="Button_OnClick1"
+                            Content="Execute code"/>
+
+                    <Image x:Name="Image1" Grid.Column="2" Margin="10" Height="250"/>
+
+                </Grid>
+
+                <!-- TITLE OF EXAMPLE 2 -->
+                <TextBlock Style="{StaticResource  TitleTextBlock}"
+                           Text="Rectangle"/>
+
+                <!-- DESCRIPTON OF EXAMPLE 2 -->
+                <TextBlock Style="{StaticResource DescriptionTextBlock}"
+                           Text="We can draw reactangle on needed canvas."/>
+
+                <!-- EXAMPLE 2 -->
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                               Style="{StaticResource CodeTextBlock}"
+                               Text="{Binding ExampleTwoCode}"/>
+
+                    <Button Grid.Column="1"
+                            Style="{StaticResource RoundButtonTemplate}"
+                            Click="Button_OnClick2"
+                            Content="Execute code"/>
+
+                    <Image x:Name="Image2" Grid.Column="2" Margin="10" Height="250"/>
+
+                </Grid>
+
+                <!-- TITLE OF EXAMPLE 3 -->
+                <TextBlock Style="{StaticResource  TitleTextBlock}"
+                           Text="Circle"/>
+
+                <!-- DESCRIPTON OF EXAMPLE 3 -->
+                <TextBlock Style="{StaticResource DescriptionTextBlock}"
+                           Text="We can draw Circle."/>
+
+                <!-- EXAMPLE 3 -->
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                               Style="{StaticResource CodeTextBlock}"
+                               Text="{Binding ExampleThreeCode}"/>
+
+                    <Button Grid.Column="1"
+                            Style="{StaticResource RoundButtonTemplate}"
+                            Click="Button_OnClick3"
+                            Content="Execute code"/>
+
+                    <Image x:Name="Image3" Grid.Column="2" Margin="10" Height="250"/>
+
+                </Grid>
+
+                <!-- TITLE OF EXAMPLE 4 -->
+                <TextBlock Style="{StaticResource  TitleTextBlock}"
+                           Text="Oval"/>
+
+                <!-- DESCRIPTON OF EXAMPLE 4 -->
+                <TextBlock Style="{StaticResource DescriptionTextBlock}"
+                           Text="We can draw different ovals."/>
+
+                <!-- EXAMPLE 4 -->
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                               Style="{StaticResource CodeTextBlock}"
+                               Text="{Binding ExampleFourCode}"/>
+
+                    <Button Grid.Column="1"
+                            Style="{StaticResource RoundButtonTemplate}"
+                            Click="Button_OnClick4"
+                            Content="Execute code"/>
+
+                    <Image x:Name="Image4" Grid.Column="2" Margin="10" Height="250"/>
+
+                </Grid>
+
+            </StackPanel>
+
+        </ScrollViewer>
+
+    </Window.Content>
+
 </Window>

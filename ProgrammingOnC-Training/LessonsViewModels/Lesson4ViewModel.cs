@@ -1,61 +1,46 @@
-﻿using FuncProgrammingProjectDOTNET.LessonsViewModels;
-using SkiaSharp;
-using SkiaSharp.Views.Desktop;
-using System;
-using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+﻿using GalaSoft.MvvmLight.Command;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
-namespace FuncProgrammingProjectDOTNET.LessonsViews
+namespace FuncProgrammingProjectDOTNET.LessonsViewModels
 {
-    /// <summary>
-    /// Interaction logic for Lesson4.xaml
-    /// </summary>
-    public partial class Lesson4 : Window
+    class Lesson4ViewModel : INotifyPropertyChanged
     {
-        public Lesson4()
+        #region -- INotifyPropertyChanged implementation --
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
+
+        #region -- Public properties --
+
+        public string ExampleOneCode => Constants.ExampleOneCode;
+
+        public string ExampleTwoCode => Constants.ExampleTwoCode;
+
+        public string ExampleThreeCode => Constants.ExampleThreeCode;
+
+        public string ExampleFourCode => Constants.ExampleFourCode;
+
+        #endregion
+
+        #region -- Private helpers --
+
+        private void SetProperty<T>(ref T oldValue, T newValue, [CallerMemberName] string prop = null)
         {
-            DataContext = new Lesson4ViewModel();
-            InitializeComponent();
+            if (oldValue == null || !oldValue.Equals(newValue))
+            {
+                oldValue = newValue;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+            }
         }
 
-        private void Button_OnClick1(object sender, RoutedEventArgs e)
-        {
-            var writeableBitmap = CreateImage(900, 500);
-            UpdateImage1(writeableBitmap);
-            Image1.Source = writeableBitmap;
-        }
+        #endregion
 
-        private void Button_OnClick2(object sender, RoutedEventArgs e)
+        private static class Constants
         {
-            var writeableBitmap = CreateImage(900, 500);
-            UpdateImage2(writeableBitmap);
-            Image2.Source = writeableBitmap;
-        }
-
-        private void Button_OnClick3(object sender, RoutedEventArgs e)
-        {
-            var writeableBitmap = CreateImage(900, 500);
-            UpdateImage3(writeableBitmap);
-            Image3.Source = writeableBitmap;
-        }
-
-        private void Button_OnClick4(object sender, RoutedEventArgs e)
-        {
-            var writeableBitmap = CreateImage(900, 500);
-            UpdateImage4(writeableBitmap);
-            Image4.Source = writeableBitmap;
-        }
-
-        private WriteableBitmap CreateImage(int width, int height)
-        {
-            var writeableBitmap = new WriteableBitmap(width, height, 96, 96, PixelFormats.Bgra32, BitmapPalettes.Halftone256Transparent);
-            return writeableBitmap;
-        }
-
-        private void UpdateImage1(WriteableBitmap writeableBitmap)
-        {
-            int width = (int)writeableBitmap.Width,
+            public static string ExampleOneCode = @"int width = (int)writeableBitmap.Width,
                 height = (int)writeableBitmap.Height;
             writeableBitmap.Lock();
             var skImageInfo = new SKImageInfo()
@@ -71,15 +56,12 @@ namespace FuncProgrammingProjectDOTNET.LessonsViews
             {
                 SKCanvas canvas = surface.Canvas;
                 canvas.Clear(new SKColor(130, 130, 130));
-                canvas.DrawText("SkiaSharp in Wpf!", 50, 200, new SKPaint() { Color = new SKColor(0, 0, 0), TextSize = 100 });
+                canvas.DrawText('SkiaSharp in Wpf!', 50, 200, new SKPaint() { Color = new SKColor(0, 0, 0), TextSize = 100 });
             }
-            writeableBitmap.AddDirtyRect(new Int32Rect(0, 0, width, height));
-            writeableBitmap.Unlock();
-        }
+        writeableBitmap.AddDirtyRect(new Int32Rect(0, 0, width, height));
+            writeableBitmap.Unlock();";
 
-        private void UpdateImage2(WriteableBitmap writeableBitmap)
-        {
-            int width = (int)writeableBitmap.Width,
+            public static string ExampleTwoCode = @"int width = (int)writeableBitmap.Width,
                 height = (int)writeableBitmap.Height;
             writeableBitmap.Lock();
             var skImageInfo = new SKImageInfo()
@@ -98,12 +80,9 @@ namespace FuncProgrammingProjectDOTNET.LessonsViews
                 canvas.DrawRect(width / 2 - 600 / 2, height / 2 - 300 / 2, 600, 300, new SKPaint { Color = SKColor.FromHsl(0, 100, 50) });
             }
             writeableBitmap.AddDirtyRect(new Int32Rect(0, 0, width, height));
-            writeableBitmap.Unlock();
-        }
+            writeableBitmap.Unlock();";
 
-        private void UpdateImage3(WriteableBitmap writeableBitmap)
-        {
-            int width = (int)writeableBitmap.Width,
+            public static string ExampleThreeCode = @"int width = (int)writeableBitmap.Width,
                 height = (int)writeableBitmap.Height;
             writeableBitmap.Lock();
             var skImageInfo = new SKImageInfo()
@@ -123,12 +102,9 @@ namespace FuncProgrammingProjectDOTNET.LessonsViews
             }
 
             writeableBitmap.AddDirtyRect(new Int32Rect(0, 0, width, height));
-            writeableBitmap.Unlock();
-        }
+            writeableBitmap.Unlock();";
 
-        private void UpdateImage4(WriteableBitmap writeableBitmap)
-        {
-            int width = (int)writeableBitmap.Width,
+            public static string ExampleFourCode = @"nt width = (int)writeableBitmap.Width,
                 height = (int)writeableBitmap.Height;
             writeableBitmap.Lock();
             var skImageInfo = new SKImageInfo()
@@ -148,7 +124,7 @@ namespace FuncProgrammingProjectDOTNET.LessonsViews
             }
 
             writeableBitmap.AddDirtyRect(new Int32Rect(0, 0, width, height));
-            writeableBitmap.Unlock();
+            writeableBitmap.Unlock();";
         }
     }
 }
